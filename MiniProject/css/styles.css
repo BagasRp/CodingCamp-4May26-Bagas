@@ -1,0 +1,479 @@
+/* ============================================================
+   CSS Reset
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================================
+   CSS Custom Properties
+   ============================================================ */
+:root {
+  /* Colours — all pairs meet WCAG 2.1 AA (≥4.5:1 for normal text) */
+  --color-bg:           #1a1a2e;
+  --color-surface:      #16213e;
+  --color-surface-alt:  #0f3460;
+  --color-primary:      #e94560;
+  --color-primary-dark: #c73652;
+  --color-text:         #eaeaea;
+  --color-text-muted:   #a0a0b0;
+  --color-border:       #2a2a4a;
+  --color-success:      #4caf50;
+  --color-warning:      #ff9800;
+  --color-error:        #f44336;
+  --color-disabled:     #555570;
+
+  /* Spacing scale */
+  --space-xs:  0.25rem;   /*  4px */
+  --space-sm:  0.5rem;    /*  8px */
+  --space-md:  1rem;      /* 16px */
+  --space-lg:  1.5rem;    /* 24px */
+  --space-xl:  2rem;      /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+
+  /* Typography */
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-size-base:  1rem;       /* 16px */
+  --font-size-sm:    0.875rem;   /* 14px */
+  --font-size-lg:    1.125rem;   /* 18px */
+  --font-size-xl:    1.5rem;     /* 24px */
+  --font-size-2xl:   2rem;       /* 32px */
+  --font-size-3xl:   3rem;       /* 48px */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold:   700;
+  --line-height-tight:  1.2;
+  --line-height-normal: 1.5;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-font-size: var(--font-size-sm);
+}
+
+/* ============================================================
+   Dashboard Grid — four-widget layout
+   ============================================================ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Widget Base
+   ============================================================ */
+.widget {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.widget h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================================
+   Form Elements
+   ============================================================ */
+input[type="text"],
+input[type="url"] {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  transition: border-color var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-border);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--color-error);
+  color: #fff;
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Validation messages
+   ============================================================ */
+.validation-msg {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  margin-top: var(--space-xs);
+  min-height: 1.2em;
+}
+
+/* ============================================================
+   Responsive — single column at ≤600px (covers 375px)
+   ============================================================ */
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .widget {
+    min-height: 200px;
+  }
+}
+
+/* ============================================================
+   To-Do List Widget
+   ============================================================ */
+
+/* Add-task form */
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.todo-input-wrapper {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.todo-input {
+  flex: 1;
+}
+
+.todo-add-btn {
+  flex-shrink: 0;
+}
+
+/* Task list */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.todo-empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+/* Individual task item */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.todo-item:hover {
+  background-color: var(--color-border);
+}
+
+/* Completion toggle button */
+.todo-toggle {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  padding: 0;
+}
+
+.todo-toggle:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* Task description */
+.todo-desc {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  word-break: break-word;
+}
+
+/* Completed task — strikethrough + muted colour */
+.task-completed .todo-desc {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.task-completed .todo-toggle {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* Edit / Delete buttons */
+.todo-edit,
+.todo-delete {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* Inline edit mode */
+.todo-edit-input {
+  flex: 1;
+}
+
+.todo-edit-validation {
+  display: block;
+  width: 100%;
+}
+
+.todo-confirm,
+.todo-cancel {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+/* ============================================================
+   Focus Timer Widget
+   ============================================================ */
+.timer-display {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-status {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  min-height: 1.4em;
+  color: var(--color-text-muted);
+}
+
+.timer-controls {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+/* Session-ended state — distinct visual indicator (Requirement 3.4) */
+.timer-ended {
+  background-color: color-mix(in srgb, var(--color-warning) 15%, var(--color-surface));
+  border-color: var(--color-warning);
+}
+
+.timer-ended .timer-display {
+  color: var(--color-warning);
+}
+
+.timer-ended .timer-status {
+  color: var(--color-warning);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ============================================================
+   Quick Links Widget
+   ============================================================ */
+
+/* Add-link form */
+.links-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.links-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.links-add-btn {
+  align-self: flex-start;
+  margin-top: var(--space-xs);
+}
+
+/* Links panel — wrapping grid of link items */
+.links-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Empty state */
+.links-empty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+/* Individual link item — link button + delete button side by side */
+.links-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.links-item:hover {
+  background-color: var(--color-border);
+}
+
+/* The clickable link button */
+.links-btn {
+  flex: 1;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  word-break: break-word;
+}
+
+.links-btn:hover {
+  color: var(--color-text);
+  background-color: var(--color-primary);
+}
+
+/* Delete button */
+.links-delete {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  padding: var(--space-xs) var(--space-sm);
+}
